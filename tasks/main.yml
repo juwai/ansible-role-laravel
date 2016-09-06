@@ -1,0 +1,89 @@
+---
+- name: Register php version
+  shell: 'command -v php && php --version'
+  register: php_version
+  changed_when: false
+  ignore_errors: true
+
+- name: Uninstall existing php
+  yum:
+    name: php*
+    state: absent
+  when: "'5.6' not in php_version.stdout"
+
+- name: Install nginx.conf
+  template:
+    src: 'templates/nginx.conf.j2'
+    dest: '/etc/nginx/conf.d/{{ project }}.conf'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+    backup: yes
+
+- name: Ensure nginx log folder present
+  file:
+    path: '/var/log/nginx/{{ project }}'
+    state: directory
+    owner: 'nginx'
+    group: 'nginx'
+    mode: 0775
+
+- name: Ensure nginx start on boot
+  service:
+    name: 'nginx'
+    state: started
+    enabled: yes
+
+- name: Ensure storage folders present
+  file:
+    path: '/var/log/{{ project }}/{{ item }}'
+    state: directory
+    owner: 'nginx'
+    group: 'nginx'
+    mode: 0755
+  with_items:
+    - app
+    - framework
+    - framework/cache
+    - framework/sessions
+    - framework/views
+    - logs
+
+# Only for Vagrant environments
+- name: Place .env file in vagrant folder
+  template:
+    src: templates/dot_env.j2
+    dest: '/vagrant/.env'
+    force: no
+  when: env == 'vagrant'
+
+- name: Run composer install
+  composer:
+    command: 'install'
+    working_dir: '/vagrant'
+  when: env == 'vagrant'
+
+# Only for production and staging environments
+- name: Ensure deploy stage folder is present
+  file:
+    path: '/var/www/{{ deploy_stage }}'
+    state: directory
+    owner: 'root'
+    group: 'root'
+  when: env == 'production' or env == 'staging'
+
+- name: Ensure shared folder is present
+  file:
+    path: '/var/www/{{ deploy_stage }}/{{ project }}/shared'
+    state: directory
+    group: '{{ code_owner }}'
+    owner: '{{ code_owner }}'
+  when: env == 'production' or env == 'staging'
+
+- name: Place .env file in shared folder
+  template:
+    src: templates/.env.j2
+    dest: '/var/www/{{ deploy_stage }}/{{ project }}/shared/.env'
+    owner: '{{ code_owner }}'
+    group: '{{ code_owner }}'
+  when: env == 'production' or env == 'staging'
