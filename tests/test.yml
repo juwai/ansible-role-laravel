@@ -2,6 +2,15 @@
 - hosts: default
   remote_user: vagrant
   become: yes
+  vars:
+    env: 'vagrant'
   roles:
     - juwai.nginx
+
+- hosts: default
+  remote_user: vagrant
+  become: yes
+  vars:
+    env: 'production'
+  roles:
     - laravel

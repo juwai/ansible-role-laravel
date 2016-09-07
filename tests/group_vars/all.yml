@@ -1,4 +1,4 @@
-env: 'production'
+---
 app_env: 'test'
 app_debug: 'test'
 default_app_key: 'test'
@@ -25,5 +25,5 @@ s3_region: 'test'
 s3_bucket_name: 'test'
 server_name: 'test'
 port: 'test'
-project: 'test'
+application_name: 'test'
 deploy_stage: 'test'

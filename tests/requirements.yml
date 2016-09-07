@@ -1,2 +1,3 @@
 ---
+- src: juwai.common
 - src: juwai.nginx

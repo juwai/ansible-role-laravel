@@ -14,7 +14,7 @@
 - name: Install nginx.conf
   template:
     src: 'templates/nginx.conf.j2'
-    dest: '/etc/nginx/conf.d/{{ project }}.conf'
+    dest: '/etc/nginx/conf.d/{{ application_name }}.conf'
     owner: 'root'
     group: 'root'
     mode: 0644
@@ -22,21 +22,15 @@
 
 - name: Ensure nginx log folder present
   file:
-    path: '/var/log/nginx/{{ project }}'
+    path: '/var/log/nginx/{{ application_name }}'
     state: directory
     owner: 'nginx'
     group: 'nginx'
     mode: 0775
 
-- name: Ensure nginx start on boot
-  service:
-    name: 'nginx'
-    state: started
-    enabled: yes
-
 - name: Ensure storage folders present
   file:
-    path: '/var/log/{{ project }}/{{ item }}'
+    path: '/var/log/{{ application_name }}/{{ item }}'
     state: directory
     owner: 'nginx'
     group: 'nginx'
@@ -74,7 +68,7 @@
 
 - name: Ensure shared folder is present
   file:
-    path: '/var/www/{{ deploy_stage }}/{{ project }}/shared'
+    path: '/var/www/{{ deploy_stage }}/{{ application_name }}/shared'
     state: directory
     group: '{{ code_owner }}'
     owner: '{{ code_owner }}'
@@ -82,8 +76,8 @@
 
 - name: Place .env file in shared folder
   template:
-    src: templates/.env.j2
-    dest: '/var/www/{{ deploy_stage }}/{{ project }}/shared/.env'
+    src: templates/dot_env.j2
+    dest: '/var/www/{{ deploy_stage }}/{{ application_name }}/shared/.env'
     owner: '{{ code_owner }}'
     group: '{{ code_owner }}'
   when: env == 'production' or env == 'staging'

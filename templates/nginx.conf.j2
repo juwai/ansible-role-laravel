@@ -5,22 +5,22 @@ server {
     if ($vhost = '') {
         set $vhost 'current';
     }
-    root /var/www/staging/{{ project }}/$vhost/public;
-    access_log /var/log/nginx/{{ project }}/$vhost-access.log main;
-    error_log /var/log/nginx/{{ project }}/$vhost-error.log;
+    root /var/www/{{ deploy_stage }}/{{ application_name }}/$vhost/public;
+    access_log /var/log/nginx/{{ application_name }}/$vhost-access.log main;
+    error_log /var/log/nginx/{{ application_name }}/$vhost-error.log;
 
     {% elif env == 'production' %}
     listen {{ port }};
     server_name {{ server_name }};
-    root /var/www/live/{{ project }}/current/public;
-    access_log /var/log/nginx/{{ project }}/access.log main;
-    error_log /var/log/nginx/{{ project }}/error.log;
+    root /var/www/{{ deploy_stage }}/{{ application_name }}/current/public;
+    access_log /var/log/nginx/{{ application_name }}/access.log main;
+    error_log /var/log/nginx/{{ application_name }}/error.log;
 
     {% else %}
     listen {{ port }};
     root /vagrant/public;
-    access_log /var/log/nginx/{{ project }}/access.log main;
-    error_log /var/log/nginx/{{ project }}/error.log;
+    access_log /var/log/nginx/{{ application_name }}/access.log main;
+    error_log /var/log/nginx/{{ application_name }}/error.log;
 
     # Because of a bug in VirtualBox
     # https://github.com/mitchellh/vagrant/issues/351#issuecomment-1339640
