@@ -1,30 +1,3 @@
-APP_ENV={{ app_env }}
-APP_DEBUG={{ app_debug }}
-APP_KEY={{ default_app_key }}
-
-DB_HOST={{ db_host }}
-DB_DATABASE={{ db_database }}
-DB_USERNAME={{ db_username }}
-DB_PASSWORD={{ db_password }}
-
-FRONTEND_LIB_URL={{ frontend_lib_url }}
-AGENTADMIN_LIB_URL={{ agentadmin_lib_url }}
-DOMAIN_URL={{ domain_url }}
-
-CACHE_DRIVER={{ cache_driver }}
-SESSION_DRIVER={{ session_driver }}
-QUEUE_DRIVER={{ queue_driver }}
-
-MAIL_DRIVER={{ mail_driver }}
-MAIL_HOST={{ mail_host }}
-MAIL_PORT={{ mail_port }}
-MAIL_USERNAME={{ mail_username }}
-MAIL_PASSWORD={{ mail_password }}
-MAIL_ENCRYPTION={{ mail_encryption }}
-
-FILE_DRIVER={{ file_driver }}
-
-S3_KEY={{ s3_key }}
-S3_SECRET={{ s3_secret }}
-S3_REGION={{ s3_region }}
-S3_BUCKET_NAME={{ s3_bucket_name }}
+{% for param in dot_env %}
+{% filter upper %}{{ param['key'] }}{% endfilter %}={{ param['value'] }}
+{% endfor %}

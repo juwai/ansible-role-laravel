@@ -70,14 +70,14 @@
   file:
     path: '/var/www/{{ deploy_stage }}/{{ application_name }}/shared'
     state: directory
-    group: '{{ code_owner }}'
-    owner: '{{ code_owner }}'
+    group: '{{ deploy_user }}'
+    owner: '{{ deploy_group }}'
   when: env == 'production' or env == 'staging'
 
 - name: Place .env file in shared folder
   template:
     src: templates/dot_env.j2
     dest: '/var/www/{{ deploy_stage }}/{{ application_name }}/shared/.env'
-    owner: '{{ code_owner }}'
-    group: '{{ code_owner }}'
+    owner: '{{ deploy_user }}'
+    group: '{{ deploy_group }}'
   when: env == 'production' or env == 'staging'

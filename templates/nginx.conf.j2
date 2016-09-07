@@ -1,6 +1,6 @@
 server {
     {% if env == 'staging' %}
-    listen {{ port }};
+    listen {{ nginx_port }};
     server_name {{ server_name }};
     if ($vhost = '') {
         set $vhost 'current';
@@ -10,14 +10,14 @@ server {
     error_log /var/log/nginx/{{ application_name }}/$vhost-error.log;
 
     {% elif env == 'production' %}
-    listen {{ port }};
+    listen {{ nginx_port }};
     server_name {{ server_name }};
     root /var/www/{{ deploy_stage }}/{{ application_name }}/current/public;
     access_log /var/log/nginx/{{ application_name }}/access.log main;
     error_log /var/log/nginx/{{ application_name }}/error.log;
 
     {% else %}
-    listen {{ port }};
+    listen {{ nginx_port }};
     root /vagrant/public;
     access_log /var/log/nginx/{{ application_name }}/access.log main;
     error_log /var/log/nginx/{{ application_name }}/error.log;

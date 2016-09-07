@@ -2,7 +2,7 @@ galaxy_info:
   author: Juwai Limited
   description: Prepare for Laravel installation
   company: Juwai Limited
-  license: MIT / BSD
+  license: MIT
   min_ansible_version: 1.9
   platforms:
   - name: EL

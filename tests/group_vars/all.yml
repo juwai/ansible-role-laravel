@@ -1,29 +1,34 @@
 ---
-app_env: 'test'
-app_debug: 'test'
-default_app_key: 'test'
-db_host: 'test'
-db_database: 'test'
-db_username: 'test'
-db_password: 'test'
-frontend_lib_url: 'test'
-agentadmin_lib_url: 'test'
-domain_url: 'test'
-cache_driver: 'test'
-session_driver: 'test'
-queue_driver: 'test'
-mail_driver: 'test'
-mail_host: 'test'
-mail_port: 'test'
-mail_username: 'test'
-mail_password: 'test'
-mail_encryption: 'test'
-file_driver: 'test'
-s3_key: 'test'
-s3_secret: 'test'
-s3_region: 'test'
-s3_bucket_name: 'test'
+dot_env:
+    - { key: 'app_env', value: 'test' }
+    - { key: 'app_key', value: 'test' }
+    - { key: 'app_debug', value: 'test' }
+    - { key: 'app_log_level', value: 'test' }
+    - { key: 'app_url', value: 'test' }
+    - { key: 'db_connection', value: 'test' }
+    - { key: 'db_host', value: 'test' }
+    - { key: 'db_port', value: 'test' }
+    - { key: 'db_database', value: 'test' }
+    - { key: 'db_username', value: 'test' }
+    - { key: 'db_password', value: 'test' }
+    - { key: 'broadcast_driver', value: 'test' }
+    - { key: 'cache_driver', value: 'test' }
+    - { key: 'session_driver', value: 'test' }
+    - { key: 'queue_driver', value: 'test' }
+    - { key: 'redis_host', value: 'test' }
+    - { key: 'redis_password', value: 'test' }
+    - { key: 'redis_port', value: 'test' }
+    - { key: 'mail_driver', value: 'test' }
+    - { key: 'mail_host', value: 'test' }
+    - { key: 'mail_port', value: 'test' }
+    - { key: 'mail_username', value: 'test' }
+    - { key: 'mail_password', value: 'test' }
+    - { key: 'mail_encryption', value: 'test' }
+    - { key: 'pusher_app_id', value: 'test' }
+    - { key: 'pusher_key', value: 'test' }
+    - { key: 'pusher_secret', value: 'test' }
+
 server_name: 'test'
-port: 'test'
+nginx_port: 'test'
 application_name: 'test'
 deploy_stage: 'test'
