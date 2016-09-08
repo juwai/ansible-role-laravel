@@ -1,0 +1,3 @@
+{% for param in dot_env %}
+{% filter upper %}{{ param['key'] }}{% endfilter %}={{ param['value'] }}
+{% endfor %}

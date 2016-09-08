@@ -1,0 +1,54 @@
+server {
+    {% if env == 'staging' %}
+    listen {{ nginx_port }};
+    server_name {{ server_name }};
+    if ($vhost = '') {
+        set $vhost 'current';
+    }
+    root /var/www/{{ deploy_stage }}/{{ application_name }}/$vhost/public;
+    access_log /var/log/nginx/{{ application_name }}/$vhost-access.log main;
+    error_log /var/log/nginx/{{ application_name }}/$vhost-error.log;
+
+    {% elif env == 'production' %}
+    listen {{ nginx_port }};
+    server_name {{ server_name }};
+    root /var/www/{{ deploy_stage }}/{{ application_name }}/current/public;
+    access_log /var/log/nginx/{{ application_name }}/access.log main;
+    error_log /var/log/nginx/{{ application_name }}/error.log;
+
+    {% else %}
+    listen {{ nginx_port }};
+    root /vagrant/public;
+    access_log /var/log/nginx/{{ application_name }}/access.log main;
+    error_log /var/log/nginx/{{ application_name }}/error.log;
+
+    # Because of a bug in VirtualBox
+    # https://github.com/mitchellh/vagrant/issues/351#issuecomment-1339640
+    sendfile off;
+    {% endif %}
+
+    index index.php index.html index.htm;
+
+    try_files $uri $uri/ @rewrite;
+
+    location @rewrite {
+        rewrite ^(.*)$ /index.php?_url=/$1;
+    }
+
+    location ~ \.php {
+
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index /index.php;
+
+        include /etc/nginx/fastcgi_params;
+
+        fastcgi_split_path_info       ^(.+\.php)(/.+)$;
+        fastcgi_param PATH_INFO       $fastcgi_path_info;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
