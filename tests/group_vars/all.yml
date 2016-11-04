@@ -29,6 +29,6 @@ dot_env:
     - { key: 'pusher_secret', value: 'test' }
 
 server_name: 'test'
-nginx_port: 'test'
+nginx_port: 80
 application_name: 'test'
 deploy_stage: 'test'
