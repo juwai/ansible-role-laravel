@@ -12,4 +12,5 @@ galaxy_info:
   #   versions:
   #   - 2013.09
   galaxy_tags: [amazon, centos6, nginx, php, laravel]
-dependencies: []
+dependencies:
+  - role: retr0h.logrotate

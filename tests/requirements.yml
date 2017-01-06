@@ -1,3 +1,4 @@
 ---
 - src: juwai.common
 - src: juwai.nginx
+- src: retr0h.logrotate
