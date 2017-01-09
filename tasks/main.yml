@@ -24,7 +24,7 @@
   args:
     options:
       - 'daily'
-      - 'rotate 7'
+      - 'rotate {{ laravel_rotate_nginx_log_retention }}'
       - 'compress'
       - 'delaycompress'
       - 'dateext'
