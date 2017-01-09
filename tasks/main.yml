@@ -24,7 +24,7 @@
   args:
     options:
       - 'daily'
-      - 'rotate 14'
+      - 'rotate 7'
       - 'compress'
       - 'delaycompress'
       - 'dateext'
@@ -32,7 +32,7 @@
       - 'sharedscripts'
     scripts:
       postrotate: '/etc/init.d/nginx reopen_logs'
-  when: laravel_log_rotate
+  when: laravel_rotate_nginx_log
 
 - name: Ensure storage folders present
   file:

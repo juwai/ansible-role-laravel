@@ -13,4 +13,4 @@ galaxy_info:
   #   - 2013.09
   galaxy_tags: [amazon, centos6, nginx, php, laravel]
 dependencies:
-  - role: retr0h.logrotate
+  - { role: retr0h.logrotate, when: laravel_rotate_nginx_log }
