@@ -1,3 +1,6 @@
 ---
 deploy_user: '{{ ansible_ssh_user }}'
 deploy_group: '{{ ansible_ssh_user }}'
+
+laravel_rotate_nginx_log: true
+laravel_rotate_nginx_log_retention: 30

@@ -17,6 +17,23 @@
     group: 'nginx'
     mode: 0775
 
+- name: Rotation for project nginx log file
+  logrotate:
+    name: '{{ application_name }}'
+    path: '/var/log/nginx/{{ application_name }}/*.log'
+  args:
+    options:
+      - 'daily'
+      - 'rotate {{ laravel_rotate_nginx_log_retention }}'
+      - 'compress'
+      - 'delaycompress'
+      - 'dateext'
+      - 'create 0644 nginx nginx'
+      - 'sharedscripts'
+    scripts:
+      postrotate: '/etc/init.d/nginx reopen_logs'
+  when: laravel_rotate_nginx_log
+
 - name: Ensure storage folders present
   file:
     path: '/var/log/{{ application_name }}/{{ item }}'
