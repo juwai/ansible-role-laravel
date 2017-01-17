@@ -36,9 +36,9 @@ server {
     }
 
     location ~ \.php {
-        {% if access_control_allow_origin is defined %}
+        {% if laravel_access_control_allow_origin is defined %}
         if ($request_method = 'OPTIONS') {
-            add_header 'Access-Control-Allow-Origin' '{{ access_control_allow_origin }}';
+            add_header 'Access-Control-Allow-Origin' '{{ laravel_access_control_allow_origin }}';
             add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
             # Custom headers and headers various browsers *should* be OK with but aren't
             add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
@@ -49,12 +49,12 @@ server {
             return 204;
         }
         if ($request_method = 'POST') {
-            add_header 'Access-Control-Allow-Origin' '{{ access_control_allow_origin }}';
+            add_header 'Access-Control-Allow-Origin' '{{ laravel_access_control_allow_origin }}';
             add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
             add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
         }
         if ($request_method = 'GET') {
-            add_header 'Access-Control-Allow-Origin' '{{ access_control_allow_origin }}';
+            add_header 'Access-Control-Allow-Origin' '{{ laravel_access_control_allow_origin }}';
             add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
             add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
         }
