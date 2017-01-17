@@ -36,6 +36,9 @@ server {
     }
 
     location ~ \.php {
+        {% if access_control_allow_origin is defined %}
+        add_header 'Access-Control-Allow-Origin' '{{ access_control_allow_origin }}';
+        {% endif %}
 
         fastcgi_pass 127.0.0.1:9000;
         fastcgi_index /index.php;

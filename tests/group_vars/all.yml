@@ -30,5 +30,6 @@ dot_env:
 
 server_name: 'test'
 nginx_port: 80
+access_control_allow_origin: '*'
 application_name: 'test'
 deploy_stage: 'test'
