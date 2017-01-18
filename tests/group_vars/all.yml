@@ -28,7 +28,8 @@ dot_env:
     - { key: 'pusher_key', value: 'test' }
     - { key: 'pusher_secret', value: 'test' }
 
-server_name: 'test'
-nginx_port: 80
+laravel_access_control_allow_origin: '*'
 application_name: 'test'
 deploy_stage: 'test'
+nginx_port: 80
+server_name: 'test'
