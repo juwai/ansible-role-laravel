@@ -45,11 +45,28 @@ Nginx server_name.
 
 Nginx port.
 
+### laravel_rotate_nginx_log
+
+Use logrotage for the nginx log files.
+
+Default is true.
+
+### laravel_rotate_nginx_log_retention
+
+Retention of the logrotate.
+
+Default is 30.
+
+### laravel_access_control_allow_origin
+
+Enable CORS, and specify Access-Control-Allow-Origin.
+
 Dependencies
 ------------
 
 juwai.common
 juwai.nginx
+retr0h.logrotate
 
 Example Playbook
 ----------------
