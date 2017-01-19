@@ -57,9 +57,25 @@ Retention of the logrotate.
 
 Default is 30.
 
+### laravel_access_control_allow_credentials
+
+Whether or not allow credentials for CORS, Access-Control-Allow-Credentials.
+
 ### laravel_access_control_allow_origin
 
-Enable CORS, and specify Access-Control-Allow-Origin.
+Enable CORS, and specify allowded origin, Access-Control-Allow-Origin.
+
+### laravel_access_control_allow_methods
+
+Methods allowed by CORS, Access-Control-Allow-Methods.
+
+### laravel_access_control_allow_headers
+
+Custom headers allowed by CORS, Access-Control-Allow-Headers.
+
+### laravel_access_control_max_age
+
+Valid time for pre-flight, Access-Control-Max-Age.
 
 Dependencies
 ------------

@@ -28,7 +28,11 @@ dot_env:
     - { key: 'pusher_key', value: 'test' }
     - { key: 'pusher_secret', value: 'test' }
 
+laravel_access_control_allow_credentials: false
+laravel_access_control_allow_headers: 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'
+laravel_access_control_allow_methods: 'GET,POST,OPTIONS'
 laravel_access_control_allow_origin: '*'
+laravel_access_control_max_age: 1728000
 application_name: 'test'
 deploy_stage: 'test'
 nginx_port: 80

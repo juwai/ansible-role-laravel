@@ -1,3 +1,4 @@
+#jinja2: lstrip_blocks: True
 server {
     {% if env == 'staging' %}
     listen {{ nginx_port }};
@@ -36,28 +37,20 @@ server {
     }
 
     location ~ \.php {
+        {% if laravel_access_control_allow_credentials is defined %}
+        add_header Access-Control-Allow-Credentials {{ laravel_access_control_allow_credentials|lower }};
+        {% endif %}
+        {% if laravel_access_control_allow_headers is defined %}
+        add_header Access-Control-Allow-Headers {{ laravel_access_control_allow_headers }};
+        {% endif %}
+        {% if laravel_access_control_allow_methods is defined %}
+        add_header Access-Control-Allow-Methods {{ laravel_access_control_allow_methods }};
+        {% endif %}
         {% if laravel_access_control_allow_origin is defined %}
-        if ($request_method = 'OPTIONS') {
-            add_header 'Access-Control-Allow-Origin' '{{ laravel_access_control_allow_origin }}';
-            add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
-            # Custom headers and headers various browsers *should* be OK with but aren't
-            add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-            # Tell client that this pre-flight info is valid for 20 days
-            add_header 'Access-Control-Max-Age' 1728000;
-            add_header 'Content-Type' 'text/plain charset=UTF-8';
-            add_header 'Content-Length' 0;
-            return 204;
-        }
-        if ($request_method = 'POST') {
-            add_header 'Access-Control-Allow-Origin' '{{ laravel_access_control_allow_origin }}';
-            add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
-            add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-        }
-        if ($request_method = 'GET') {
-            add_header 'Access-Control-Allow-Origin' '{{ laravel_access_control_allow_origin }}';
-            add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
-            add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-        }
+        add_header Access-Control-Allow-Origin {{ laravel_access_control_allow_origin }};
+        {% endif %}
+        {% if laravel_access_control_max_age is defined %}
+        add_header Access-Control-Max-Age {{ laravel_access_control_max_age }};
         {% endif %}
 
         fastcgi_pass 127.0.0.1:9000;
