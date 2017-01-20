@@ -59,11 +59,11 @@ Default is 30.
 
 ### laravel_access_control_allow_credentials
 
-Whether or not allow credentials for CORS, Access-Control-Allow-Credentials.
+Whether or not to allow credentials for CORS, Access-Control-Allow-Credentials.
 
 ### laravel_access_control_allow_origin
 
-Enable CORS, and specify allowded origin, Access-Control-Allow-Origin.
+Enable CORS, and specify allowed origin, Access-Control-Allow-Origin.
 
 ### laravel_access_control_allow_methods
 
