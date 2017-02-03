@@ -1,0 +1,32 @@
+---
+- include_vars: "group_vars/env-production/vault.yml"
+
+- name: create admin.juwai.com + digicert certificate file
+  template:
+    src: "admin.juwai.com.crt.j2"
+    dest: "/etc/ssl/admin.juwai.com.crt"
+    owner: root
+    group: root
+    mode: 0600
+
+- name: create admin.juwai.com key file
+  copy:
+    content: "{{ admin_juwai_com_key }}"
+    dest: "/etc/ssl/admin.juwai.com.key"
+    owner: root
+    group: '{{ web_server_user }}'
+    mode: 0640
+
+- name: create admin.juwai.com certificate file
+  copy:
+    content: "{{ admin_juwai_com_crt }}"
+    dest: "/etc/ssl/certs/sp.crt"
+    owner: root
+    group: '{{ web_server_user }}'
+    mode: 0640
+
+- name: create symlink so php saml library can find the key file
+  file:
+    src: '/etc/ssl/admin.juwai.com.key'
+    dest: '/etc/ssl/certs/sp.key'
+    state: link

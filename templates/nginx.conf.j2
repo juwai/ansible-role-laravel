@@ -17,6 +17,10 @@ server {
     access_log /var/log/nginx/{{ application_name }}/access.log main;
     error_log /var/log/nginx/{{ application_name }}/error.log;
 
+    ssl                         {{ laravel_https_enabled }};
+    ssl_certificate             {{ laravel_https_certificate }};
+    ssl_certificate_key         {{ laravel_https_key }};
+
     {% else %}
     listen {{ nginx_port }};
     root /vagrant/public;
