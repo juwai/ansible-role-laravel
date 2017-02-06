@@ -1,32 +1,32 @@
 ---
 - include_vars: "group_vars/env-production/vault.yml"
 
-- name: create admin.juwai.com + digicert certificate file
+- name: create SSL + digicert certificate file
   template:
-    src: "admin.juwai.com.crt.j2"
-    dest: "/etc/ssl/admin.juwai.com.crt"
+    src: "{{ cert_source }}"
+    dest: "{{ laravel_https_certificate }}"
     owner: root
     group: root
     mode: 0600
 
-- name: create admin.juwai.com key file
+- name: create SSL key file
   copy:
-    content: "{{ admin_juwai_com_key }}"
-    dest: "/etc/ssl/admin.juwai.com.key"
+    content: "{{ ssl_cert_priv_key }}"
+    dest: "{{ laravel_https_key }}"
     owner: root
-    group: '{{ web_server_user }}'
+    group: root
     mode: 0640
 
-- name: create admin.juwai.com certificate file
+- name: create SSL certificate file
   copy:
-    content: "{{ admin_juwai_com_crt }}"
-    dest: "/etc/ssl/certs/sp.crt"
+    content: "{{ ssl_certs_crt }}"
+    dest: "{{ sp_https_certificate }}"
     owner: root
-    group: '{{ web_server_user }}'
+    group: root
     mode: 0640
 
 - name: create symlink so php saml library can find the key file
   file:
-    src: '/etc/ssl/admin.juwai.com.key'
-    dest: '/etc/ssl/certs/sp.key'
+    src: "{{ laravel_https_key }}"
+    dest: "{{ sp_https_key }}"
     state: link
