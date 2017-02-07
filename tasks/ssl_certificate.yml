@@ -15,18 +15,4 @@
     dest: "{{ laravel_https_key }}"
     owner: root
     group: root
-    mode: 0640
-
-- name: create SSL certificate file
-  copy:
-    content: "{{ ssl_certs_crt }}"
-    dest: "{{ sp_https_certificate }}"
-    owner: root
-    group: root
-    mode: 0640
-
-- name: create symlink so php saml library can find the key file
-  file:
-    src: "{{ laravel_https_key }}"
-    dest: "{{ sp_https_key }}"
-    state: link
+    mode: 0600
