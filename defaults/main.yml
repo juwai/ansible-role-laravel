@@ -5,6 +5,6 @@ deploy_group: '{{ ansible_ssh_user }}'
 laravel_rotate_nginx_log: true
 laravel_rotate_nginx_log_retention: 30
 
-nginx_use_ssl: true
+laravel_https_enabled: true
 laravel_https_certificate: '/etc/ssl/{{ server_name }}.crt'
 laravel_https_key: '/etc/ssl/{{ server_name }}.key'
