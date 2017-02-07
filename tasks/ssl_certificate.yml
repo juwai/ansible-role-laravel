@@ -3,7 +3,7 @@
 
 - name: create SSL + digicert certificate file
   template:
-    src: "{{ cert_source }}"
+    src: "ssl.crt.j2"
     dest: "{{ laravel_https_certificate }}"
     owner: root
     group: root

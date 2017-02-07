@@ -77,6 +77,20 @@ Custom headers allowed by CORS, Access-Control-Allow-Headers.
 
 Valid time for pre-flight, Access-Control-Max-Age.
 
+### laravel_https_enabled
+
+Enable https
+
+Default is `false`
+
+### laravel_https_certificate
+
+SSL certificate path
+
+### laravel_https_key
+
+SSL certificate private key path
+
 Dependencies
 ------------
 
