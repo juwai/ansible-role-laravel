@@ -89,7 +89,7 @@
   when: env == 'production' or env == 'staging'
 
 - include: ssl_certificate.yml
-  when: laravel_https_enabled
+  when: laravel_https_enabled and (env == 'production' or env == 'staging')
 
 - name: Restart nginx
   service:

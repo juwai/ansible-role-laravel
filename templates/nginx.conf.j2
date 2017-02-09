@@ -10,6 +10,12 @@ server {
     access_log /var/log/nginx/{{ application_name }}/$vhost-access.log main;
     error_log /var/log/nginx/{{ application_name }}/$vhost-error.log;
 
+    {% if laravel_https_enabled -%}
+    ssl                         on;
+    ssl_certificate             {{ laravel_https_certificate }};
+    ssl_certificate_key         {{ laravel_https_key }};
+    {%- endif %}
+
     {% elif env == 'production' %}
     listen {{ nginx_port }};
     server_name {{ server_name }};
