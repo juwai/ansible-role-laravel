@@ -12,8 +12,8 @@ server {
 
     {% if laravel_https_enabled -%}
     ssl                         on;
-    ssl_certificate             {{ laravel_https_certificate }};
-    ssl_certificate_key         {{ laravel_https_key }};
+    ssl_certificate             {{ laravel_https_cert_path }};
+    ssl_certificate_key         {{ laravel_https_key_path }};
     {%- endif %}
 
     {% elif env == 'production' %}
@@ -25,8 +25,8 @@ server {
 
     {% if laravel_https_enabled -%}
     ssl                         on;
-    ssl_certificate             {{ laravel_https_certificate }};
-    ssl_certificate_key         {{ laravel_https_key }};
+    ssl_certificate             {{ laravel_https_cert_path }};
+    ssl_certificate_key         {{ laravel_https_key_path }};
     {%- endif %}
 
     {% else %}

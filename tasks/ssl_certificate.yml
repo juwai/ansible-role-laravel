@@ -4,15 +4,15 @@
 - name: create SSL + digicert certificate file
   template:
     src: "ssl.crt.j2"
-    dest: "{{ laravel_https_certificate }}"
+    dest: "{{ laravel_https_cert_path }}"
     owner: root
     group: root
     mode: 0600
 
 - name: create SSL key file
   copy:
-    content: "{{ ssl_cert_priv_key }}"
-    dest: "{{ laravel_https_key }}"
+    content: "{{ laravel_https_privatekey_data }}"
+    dest: "{{ laravel_https_key_path }}"
     owner: root
     group: root
     mode: 0600

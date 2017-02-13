@@ -6,5 +6,5 @@ laravel_rotate_nginx_log: true
 laravel_rotate_nginx_log_retention: 30
 
 laravel_https_enabled: false
-laravel_https_certificate: '/etc/ssl/{{ server_name }}.crt'
-laravel_https_key: '/etc/ssl/{{ server_name }}.key'
+laravel_https_cert_path: '/etc/ssl/{{ server_name }}.crt'
+laravel_https_key_path: '/etc/ssl/{{ server_name }}.key'
