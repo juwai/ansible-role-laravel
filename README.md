@@ -95,9 +95,9 @@ SSL certificate private key path
 
 SSL certificate
 
-### laravel_https_digicert_data
+### laravel_https_chain_data
 
-SSL Digi certificate
+Intermediate level of certificate
 
 ### laravel_https_privatekey_data
 
