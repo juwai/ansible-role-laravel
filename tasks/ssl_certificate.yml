@@ -1,7 +1,7 @@
 ---
 - include_vars: "group_vars/env-production/vault.yml"
 
-- name: create SSL + digicert certificate file
+- name: create SSL certificate file
   template:
     src: "ssl.crt.j2"
     dest: "{{ laravel_https_cert_path }}"
