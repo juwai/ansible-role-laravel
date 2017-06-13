@@ -21,7 +21,7 @@ server {
     server_name {{ server_name }};
 
     {% if laravel_https_redirect -%}
-    return 301 https://{{ server_name }}$request_uri;
+    return 301 $scheme://{{ server_name }}$request_uri;
     {%- endif %}
 
     root /var/www/{{ deploy_stage }}/{{ application_name }}/current/public;
