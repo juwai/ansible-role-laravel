@@ -1,0 +1,18 @@
+---
+- include_vars: "group_vars/env-production/vault.yml"
+
+- name: create SSL certificate file
+  template:
+    src: "ssl.crt.j2"
+    dest: "{{ laravel_https_cert_path }}"
+    owner: root
+    group: root
+    mode: 0600
+
+- name: create SSL key file
+  copy:
+    content: "{{ laravel_https_privatekey_data }}"
+    dest: "{{ laravel_https_key_path }}"
+    owner: root
+    group: root
+    mode: 0600

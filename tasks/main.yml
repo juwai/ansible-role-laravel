@@ -88,6 +88,9 @@
     group: '{{ deploy_group }}'
   when: env == 'production' or env == 'staging'
 
+- include: ssl_certificate.yml
+  when:
+    - laravel_https_enabled
 
 - name: Restart nginx
   service:

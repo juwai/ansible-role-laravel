@@ -10,12 +10,24 @@ server {
     access_log /var/log/nginx/{{ application_name }}/$vhost-access.log main;
     error_log /var/log/nginx/{{ application_name }}/$vhost-error.log;
 
+    {% if laravel_https_enabled -%}
+    ssl                         on;
+    ssl_certificate             {{ laravel_https_cert_path }};
+    ssl_certificate_key         {{ laravel_https_key_path }};
+    {%- endif %}
+
     {% elif env == 'production' %}
     listen {{ nginx_port }};
     server_name {{ server_name }};
     root /var/www/{{ deploy_stage }}/{{ application_name }}/current/public;
     access_log /var/log/nginx/{{ application_name }}/access.log main;
     error_log /var/log/nginx/{{ application_name }}/error.log;
+
+    {% if laravel_https_enabled -%}
+    ssl                         on;
+    ssl_certificate             {{ laravel_https_cert_path }};
+    ssl_certificate_key         {{ laravel_https_key_path }};
+    {%- endif %}
 
     {% else %}
     listen {{ nginx_port }};
