@@ -20,10 +20,6 @@ server {
     listen {{ nginx_port }};
     server_name {{ server_name }};
 
-    {% if laravel_https_redirect -%}
-    return 301 $scheme://{{ server_name }}$request_uri;
-    {%- endif %}
-
     root /var/www/{{ deploy_stage }}/{{ application_name }}/current/public;
     access_log /var/log/nginx/{{ application_name }}/access.log main;
     error_log /var/log/nginx/{{ application_name }}/error.log;
@@ -85,3 +81,12 @@ server {
         deny all;
     }
 }
+
+{% if laravel_https_redirect -%}
+server {
+    listen         80;
+    listen         [::]:80;
+    server_name    {{ server_name }};
+    return         301 https://{{ server_name }}$request_uri;
+}
+{%- endif %}
