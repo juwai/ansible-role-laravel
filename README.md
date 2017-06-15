@@ -103,11 +103,11 @@ Intermediate level of certificate
 
 SSL private key
 
-### laravel https redirect
+### laravel_https_redirect
 
 Redirect site from http to https
 
-Default is `true`
+Default is `false`
 
 Dependencies
 ------------
