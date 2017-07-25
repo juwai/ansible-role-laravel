@@ -2,7 +2,7 @@
 - name: Install nginx configuration
   template:
     src: 'templates/nginx.conf.j2'
-    dest: '/etc/nginx/conf.d/{{ application_name }}.conf'
+    dest: '/etc/nginx/conf.d/{{ laravel_application_name }}.conf'
     owner: 'root'
     group: 'root'
     mode: 0644
@@ -11,7 +11,7 @@
 
 - name: Ensure nginx log folder present
   file:
-    path: '/var/log/nginx/{{ application_name }}'
+    path: '/var/log/nginx/{{ laravel_application_name }}'
     state: directory
     owner: 'nginx'
     group: 'nginx'
@@ -19,8 +19,8 @@
 
 - name: Rotation for project nginx log file
   logrotate:
-    name: '{{ application_name }}'
-    path: '/var/log/nginx/{{ application_name }}/*.log'
+    name: '{{ laravel_application_name }}'
+    path: '/var/log/nginx/{{ laravel_application_name }}/*.log'
   args:
     options:
       - 'daily'
@@ -36,61 +36,61 @@
 
 - name: Ensure storage folders present
   file:
-    path: '/var/log/{{ application_name }}/{{ item }}'
+    path: '/var/log/{{ laravel_application_name }}/{{ item }}'
     state: directory
     owner: 'nginx'
     group: 'nginx'
     mode: 0755
   with_items:
-    - app
-    - framework
-    - framework/cache
-    - framework/sessions
-    - framework/views
-    - logs
+    - 'app'
+    - 'framework'
+    - 'framework/cache'
+    - 'framework/sessions'
+    - 'framework/views'
+    - 'logs'
 
 # Only for Vagrant environments
 - name: Place .env file in vagrant folder
   template:
-    src: templates/dot_env.j2
+    src: 'templates/dot_env.j2'
     dest: '/vagrant/.env'
     force: no
-  when: env == 'vagrant'
+  when: laravel_env == 'vagrant'
 
 - name: Run composer install
   composer:
     command: 'install'
     working_dir: '/vagrant'
-  when: env == 'vagrant'
+  when: laravel_env == 'vagrant'
 
 # Only for production and staging environments
 - name: Ensure deploy stage folder is present
   file:
-    path: '/var/www/{{ deploy_stage }}'
+    path: '{{ laravel_www_dir }}/{{ laravel_stage }}'
     state: directory
     owner: 'root'
     group: 'root'
-  when: env == 'production' or env == 'staging'
+  when: laravel_env == 'production' or laravel_env == 'staging'
 
 - name: Ensure shared folder is present
   file:
-    path: '/var/www/{{ deploy_stage }}/{{ application_name }}/shared'
+    path: '{{ laravel_www_dir }}/{{ laravel_stage }}/{{ laravel_application_name }}/shared'
     state: directory
-    group: '{{ deploy_user }}'
-    owner: '{{ deploy_group }}'
-  when: env == 'production' or env == 'staging'
+    group: '{{ laravel_deploy_user }}'
+    owner: '{{ laravel_deploy_group }}'
+  when: laravel_env == 'production' or laravel_env == 'staging'
 
 - name: Place .env file in shared folder
   template:
-    src: templates/dot_env.j2
-    dest: '/var/www/{{ deploy_stage }}/{{ application_name }}/shared/.env'
-    owner: '{{ deploy_user }}'
-    group: '{{ deploy_group }}'
-  when: env == 'production' or env == 'staging'
+    src: 'templates/dot_env.j2'
+    dest: '{{ laravel_www_dir }}/{{ laravel_stage }}/{{ laravel_application_name }}/shared/.env'
+    owner: '{{ laravel_deploy_user }}'
+    group: '{{ laravel_deploy_group }}'
+    backup: true
+  when: laravel_env == 'production' or laravel_env == 'staging'
 
 - include: ssl_certificate.yml
-  when:
-    - laravel_https_enabled
+  when: laravel_https_enabled
 
 - name: Restart nginx
   service:

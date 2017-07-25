@@ -33,7 +33,6 @@ laravel_access_control_allow_headers: 'Cache-Control,Content-Type,DNT,If-Modifie
 laravel_access_control_allow_methods: 'GET,OPTIONS,POST'
 laravel_access_control_allow_origin: '*'
 laravel_access_control_max_age: 1728000
-application_name: 'test'
-deploy_stage: 'test'
-nginx_port: 80
-server_name: 'test'
+laravel_application_name: 'test'
+laravel_stage: 'test'
+laravel_server_name: 'test'

@@ -3,14 +3,15 @@
   remote_user: vagrant
   become: yes
   vars:
-    env: 'vagrant'
+    laravel_env: 'vagrant'
   roles:
+    - geerlingguy.repo-epel
     - juwai.nginx
 
 - hosts: default
   remote_user: vagrant
   become: yes
   vars:
-    env: 'production'
+    laravel_env: 'production'
   roles:
     - laravel
