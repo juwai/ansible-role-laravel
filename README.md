@@ -13,37 +13,53 @@ Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-### deploy_user
+### laravel_deploy_user
 
 User owning application code files.
 
-Default is the value of `ansible_ssh_user`.
+Default is the value of `ansible_user`.
 
-### deploy_group
+### laravel_deploy_group
 
 Group owning application code files.
 
-Default is the value of `ansible_ssh_user`.
+Default is the value of `ansible_user`.
 
-### application_name
+### laravel_www_dir
+
+Base directory for applications.
+
+Default is `/var/www`.
+
+### laravel_application_name
 
 Application name used for folders.
 
-### deploy_stage
+### laravel_stage
 
 Stage name used for folders.
 
-### dot_env
+Default is `vagrant`.
+
+### laravel_env
+
+Environment (`vagrant`, `staging`, or `production`).
+
+### laravel_dot_env
 
 Array of key value pairs for application config.
 
-### server_name
+### laravel_server_name
 
 Nginx server_name.
 
-### nginx_port
+Default is `localhost`.
+
+### laravel_nginx_port
 
 Nginx port.
+
+Default is 80.
 
 ### laravel_rotate_nginx_log
 

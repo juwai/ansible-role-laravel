@@ -1,6 +1,4 @@
 ---
-- include_vars: "group_vars/env-production/vault.yml"
-
 - name: create SSL certificate file
   template:
     src: "ssl.crt.j2"

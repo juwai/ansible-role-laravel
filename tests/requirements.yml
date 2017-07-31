@@ -1,4 +1,5 @@
 ---
+- src: geerlingguy.repo-epel
 - src: juwai.common
 - src: juwai.nginx
 - src: retr0h.logrotate

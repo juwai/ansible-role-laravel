@@ -1,11 +1,25 @@
 ---
-deploy_user: '{{ ansible_ssh_user }}'
-deploy_group: '{{ ansible_ssh_user }}'
+laravel_application_name: '{{ application_name }}'
+
+laravel_deploy_group: '{{ deploy_group | default(ansible_user) }}'
+laravel_deploy_user: '{{ deploy_user | default(ansible_user) }}'
+
+laravel_dot_env: '{{ dot_env }}'
+
+laravel_env: '{{ env }}'
+
+laravel_https_cert_path: '/etc/ssl/{{ laravel_application_name }}.crt'
+laravel_https_enabled: false
+laravel_https_key_path: '/etc/ssl/{{ laravel_application_name }}.key'
+laravel_https_redirect: false
+
+laravel_nginx_port: '{{ nginx_port | default(80) }}'
 
 laravel_rotate_nginx_log: true
 laravel_rotate_nginx_log_retention: 30
 
-laravel_https_enabled: false
-laravel_https_redirect: false
-laravel_https_cert_path: '/etc/ssl/{{ application_name }}.crt'
-laravel_https_key_path: '/etc/ssl/{{ application_name }}.key'
+laravel_server_name: '{{ server_name | default("localhost") }}'
+
+laravel_stage: '{{ deploy_stage | default("vagrant") }}'
+
+laravel_www_dir: '/var/www'
