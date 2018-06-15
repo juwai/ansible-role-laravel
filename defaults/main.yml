@@ -13,6 +13,7 @@ laravel_https_enabled: false
 laravel_https_key_path: '/etc/ssl/{{ laravel_application_name }}.key'
 laravel_https_redirect: false
 
+laravel_nginx_extra_config: ''
 laravel_nginx_port: '{{ nginx_port | default(80) }}'
 
 laravel_rotate_nginx_log: true

@@ -55,6 +55,12 @@ Nginx server_name.
 
 Default is `localhost`.
 
+### laravel_nginx_extra_config
+
+Extra config block for nginx.
+
+Default is `''`.
+
 ### laravel_nginx_port
 
 Nginx port.
