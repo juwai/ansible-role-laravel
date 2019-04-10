@@ -1,4 +1,6 @@
 #jinja2: lstrip_blocks: True
+{{ laravel_nginx_global_config }}
+
 server {
     {% if laravel_env == 'staging' %}
     listen {{ laravel_nginx_port }};
