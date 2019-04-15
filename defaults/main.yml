@@ -14,6 +14,7 @@ laravel_https_key_path: '/etc/ssl/{{ laravel_application_name }}.key'
 laravel_https_redirect: false
 
 laravel_nginx_global_config: ''
+nginx_access_log_tag: 'main'
 
 laravel_nginx_extra_config: ''
 laravel_nginx_port: '{{ nginx_port | default(80) }}'
