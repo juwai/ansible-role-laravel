@@ -9,7 +9,7 @@ server {
         set $vhost 'current';
     }
     root {{ laravel_www_dir }}/{{ laravel_stage }}/{{ laravel_application_name }}/$vhost/public;
-    access_log /var/log/nginx/{{ laravel_application_name }}/$vhost-access.log {{ nginx_access_log_tag }};
+    access_log /var/log/nginx/{{ laravel_application_name }}/$vhost-access.log {{ laravel_nginx_access_log_format }};
     error_log /var/log/nginx/{{ laravel_application_name }}/error.log;
 
     {% if laravel_https_enabled -%}
@@ -23,7 +23,7 @@ server {
     server_name {{ laravel_server_name }};
 
     root {{ laravel_www_dir }}/{{ laravel_stage }}/{{ laravel_application_name }}/current/public;
-    access_log /var/log/nginx/{{ laravel_application_name }}/access.log {{ nginx_access_log_tag }};
+    access_log /var/log/nginx/{{ laravel_application_name }}/access.log {{ laravel_nginx_access_log_format }};
     error_log /var/log/nginx/{{ laravel_application_name }}/error.log;
 
     {% if laravel_https_enabled -%}
@@ -35,7 +35,7 @@ server {
     {% else %}
     listen {{ laravel_nginx_port }};
     root /vagrant/public;
-    access_log /var/log/nginx/{{ laravel_application_name }}/access.log {{ nginx_access_log_tag }};
+    access_log /var/log/nginx/{{ laravel_application_name }}/access.log {{ laravel_nginx_access_log_format }};
     error_log /var/log/nginx/{{ laravel_application_name }}/error.log;
 
     # Because of a bug in VirtualBox
