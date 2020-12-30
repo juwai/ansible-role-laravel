@@ -12,6 +12,12 @@ server {
     access_log /var/log/nginx/{{ laravel_application_name }}/$vhost-access.log {{ laravel_nginx_access_log_format }};
     error_log /var/log/nginx/{{ laravel_application_name }}/error.log;
 
+    {% if laravel_nginx_real_ip %}
+    set_real_ip_from 0.0.0.0/0;
+    real_ip_header X-Forwarded-For;
+    real_ip_recursive on;
+    {%- endif %}
+
     {% if laravel_https_enabled -%}
     ssl                         on;
     ssl_certificate             {{ laravel_https_cert_path }};
@@ -25,6 +31,12 @@ server {
     root {{ laravel_www_dir }}/{{ laravel_stage }}/{{ laravel_application_name }}/current/public;
     access_log /var/log/nginx/{{ laravel_application_name }}/access.log {{ laravel_nginx_access_log_format }};
     error_log /var/log/nginx/{{ laravel_application_name }}/error.log;
+
+    {% if laravel_nginx_real_ip %}
+    set_real_ip_from 0.0.0.0/0;
+    real_ip_header X-Forwarded-For;
+    real_ip_recursive on;
+    {%- endif %}
 
     {% if laravel_https_enabled -%}
     ssl                         on;
@@ -77,6 +89,9 @@ server {
         fastcgi_param PATH_INFO       $fastcgi_path_info;
         fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        {% if laravel_nginx_real_ip %}
+        fastcgi_param HTTP_X_REAL_IP  $remote_addr;
+        {% endif %}
     }
 
     {{ laravel_nginx_extra_config }}

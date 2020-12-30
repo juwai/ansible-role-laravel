@@ -18,6 +18,9 @@ laravel_nginx_access_log_format: 'main'
 
 laravel_nginx_extra_config: ''
 laravel_nginx_port: '{{ nginx_port | default(80) }}'
+laravel_nginx_real_ip: false
+
+laravel_generate_nginx_config: true
 
 laravel_rotate_nginx_log: true
 laravel_rotate_nginx_log_retention: 30

@@ -67,6 +67,18 @@ Nginx port.
 
 Default is 80.
 
+### laravel_nginx_real_ip
+
+Use Nginx module: ngx_http_realip_module, and add HTTP_X_REAL_IP to fastcgi_param.
+
+Default is false.
+
+### laravel_generate_nginx_config
+
+Whether generate nginx config file or not.
+
+Default is true.
+
 ### laravel_rotate_nginx_log
 
 Use logrotage for the nginx log files.
