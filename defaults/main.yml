@@ -12,6 +12,7 @@ laravel_https_cert_path: '/etc/ssl/{{ laravel_application_name }}.crt'
 laravel_https_enabled: false
 laravel_https_key_path: '/etc/ssl/{{ laravel_application_name }}.key'
 laravel_https_redirect: false
+laravel_https_redirect_by_x_forwarded_proto: false
 
 laravel_nginx_global_config: ''
 laravel_nginx_access_log_format: 'main'
