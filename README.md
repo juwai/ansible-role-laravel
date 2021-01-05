@@ -143,6 +143,12 @@ Redirect site from http to https
 
 Default is `false`
 
+### laravel_https_redirect_by_x_forwarded_proto
+
+Redirect site from http to https if http_x_forwarded_proto is http
+
+Default is `false`
+
 Dependencies
 ------------
 
