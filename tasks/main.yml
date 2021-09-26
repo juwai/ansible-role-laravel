@@ -16,7 +16,7 @@
     state: directory
     owner: 'nginx'
     group: 'nginx'
-    mode: 0775
+    mode: 0755
 
 - name: Rotation for project nginx log file
   logrotate:
