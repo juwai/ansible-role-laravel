@@ -32,7 +32,7 @@
       - 'create 0644 nginx nginx'
       - 'sharedscripts'
     scripts:
-      postrotate: '/etc/init.d/nginx reopen_logs'
+      postrotate: 'nginx -s reopen'
   when: laravel_rotate_nginx_log
 
 - name: Ensure storage folders present
